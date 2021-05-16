@@ -2,6 +2,9 @@ package com.example.affirmations
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.GridLayoutManager
+import com.example.affirmations.adapter.ItemAdapter
+import com.example.affirmations.data.Datasource
 import com.example.affirmations.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -11,5 +14,10 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        val myDataset = Datasource().loadAffirmations()
+        binding.recyclerView.layoutManager = GridLayoutManager(this, 2)
+        binding.recyclerView.adapter = ItemAdapter(this, myDataset)
+        binding.recyclerView.setHasFixedSize(true)
     }
+
 }
